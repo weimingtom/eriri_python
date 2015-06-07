@@ -16,6 +16,12 @@
 #include "token.h"
 #include "parser.h"
 
+#if defined ANDROID
+#include <jni.h>
+#include <stdlib.h>
+#include <android/log.h>
+#endif
+
 /* Forward references */
 static void fixdfa(grammar *, dfa *);
 static void fixstate(grammar *, state *);
@@ -27,6 +33,11 @@ PyGrammar_AddAccelerators(grammar *g)
 	int i;
 #ifdef Py_DEBUG
 	fprintf(stderr, "Adding parser accelerators ...\n");
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "acceler.c", 
+			"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+			"Adding parser accelerators ...");
+#endif
 #endif
 	d = g->g_dfa;
 	for (i = g->g_ndfas; --i >= 0; d++)
@@ -34,6 +45,11 @@ PyGrammar_AddAccelerators(grammar *g)
 	g->g_accel = 1;
 #ifdef Py_DEBUG
 	fprintf(stderr, "Done.\n");
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "acceler.c", 
+			"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+			"Done.");
+#endif
 #endif
 }
 

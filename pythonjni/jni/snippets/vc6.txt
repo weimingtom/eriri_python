@@ -1,0 +1,27 @@
+﻿#ifdef _DEBUG
+#define Py_DEBUG
+#endif
+-----------------------
+
+#ifdef Py_DEBUG
+
+/* Turn on heavy reference debugging */
+#define Py_TRACE_REFS
+
+/* Turn on reference counting */
+#define Py_REF_DEBUG
+
+#endif /* Py_DEBUG */
+
+----------------
+
+static int
+string_print(PyStringObject *op, FILE *fp, int flags)
+{
+	int i;
+	char c;
+	int quote;
+	
+
+----------------
+

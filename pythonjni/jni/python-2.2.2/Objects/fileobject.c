@@ -14,6 +14,12 @@
 #define HAVE_FTRUNCATE
 #endif
 
+#if defined ANDROID
+#include <jni.h>
+#include <stdlib.h>
+#include <android/log.h>
+#endif
+
 #ifdef macintosh
 #ifdef USE_GUSI
 #define HAVE_FTRUNCATE
@@ -1662,6 +1668,17 @@ PyFile_WriteString(const char *s, PyObject *f)
 			return -1;
 		}
 		fputs(s, fp);
+#ifdef ANDROID
+		if (fp == stderr) {
+			__android_log_print(ANDROID_LOG_ERROR, "fileobject.c", 
+				"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+				s);
+		} else if (fp == stdout) {
+			__android_log_print(ANDROID_LOG_INFO, "fileobject.c", 
+				"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+				s);
+		}
+#endif
 		return 0;
 	}
 	else if (!PyErr_Occurred()) {

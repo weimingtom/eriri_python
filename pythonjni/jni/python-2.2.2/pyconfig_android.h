@@ -206,6 +206,8 @@
 
 /* Define if you want to build an interpreter with many run-time checks  */
 /* #undef Py_DEBUG */
+//for more info
+#define Py_DEBUG
 
 /* Define to force use of thread-safe errno, h_errno, and other functions */
 #define _REENTRANT 1

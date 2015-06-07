@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#if defined ANDROID
+#include <jni.h>
+#include <stdlib.h>
+#include <android/log.h>
+#endif
+
+
 JNIEXPORT jint Java_com_iteye_weimingtom_pythonjni_PythonJNI_exec
   (JNIEnv *env, jobject obj, jstring filename)
 {
@@ -22,9 +29,13 @@ JNIEXPORT jint Java_com_iteye_weimingtom_pythonjni_PythonJNI_exec
 	ret = PyRun_SimpleString(
 		"print 'Hello World!'\n"
 	);
-	if(ret == -1)
-	{
+	if(ret == -1) {
 		fprintf(stderr, "error when startup\n");
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "python.c", 
+			"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+			"error when startup");
+#endif
 	}
 	Py_Finalize();
 	return ret;

@@ -22,6 +22,12 @@
 #include "windows.h"
 #endif
 
+#if defined ANDROID
+#include <jni.h>
+#include <stdlib.h>
+#include <android/log.h>
+#endif
+
 #ifdef macintosh
 #include "macglue.h"
 #endif
@@ -235,6 +241,11 @@ Py_Finalize(void)
 
 #ifdef Py_REF_DEBUG
 	fprintf(stderr, "[%ld refs]\n", _Py_RefTotal);
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "pythonrun.c", 
+			"[%s:%d %s][%ld refs]", __FILE__, __LINE__, __FUNCTION__, 
+			_Py_RefTotal);
+#endif
 #endif
 
 #ifdef Py_TRACE_REFS
@@ -526,6 +537,11 @@ PyRun_InteractiveLoopFlags(FILE *fp, char *filename, PyCompilerFlags *flags)
 		ret = PyRun_InteractiveOneFlags(fp, filename, flags);
 #ifdef Py_REF_DEBUG
 		fprintf(stderr, "[%ld refs]\n", _Py_RefTotal);
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "pythonrun.c", 
+			"[%s:%d %s][%ld refs]", __FILE__, __LINE__, __FUNCTION__, 
+			_Py_RefTotal);
+#endif
 #endif
 		if (ret == E_EOF)
 			return 0;
@@ -1247,6 +1263,11 @@ err_input(perrdetail *err)
 		break;
 	default:
 		fprintf(stderr, "error=%d\n", err->error);
+#ifdef ANDROID
+		__android_log_print(ANDROID_LOG_ERROR, "pythonrun.c", 
+			"[%s:%d %s]error=%d", __FILE__, __LINE__, __FUNCTION__, 
+			err->error);
+#endif
 		msg = "unknown parsing error";
 		break;
 	}

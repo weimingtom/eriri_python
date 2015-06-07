@@ -10,6 +10,12 @@
 #include <direct.h>
 #endif
 
+#if defined ANDROID
+#include <jni.h>
+#include <stdlib.h>
+#include <android/log.h>
+#endif
+
 #ifdef WITH_NEXT_FRAMEWORK
 #include <mach-o/dyld.h>
 #endif
@@ -478,27 +484,45 @@ calculate_path(void)
     */
 
     if (!(pfound = search_for_prefix(argv0_path, home))) {
-        if (!Py_FrozenFlag)
+        if (!Py_FrozenFlag) {
             fprintf(stderr,
                 "Could not find platform independent libraries <prefix>\n");
-        strncpy(prefix, PREFIX, MAXPATHLEN);
+#ifdef ANDROID
+			__android_log_print(ANDROID_LOG_ERROR, "getpath.c", 
+				"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+				"Could not find platform independent libraries <prefix>");
+#endif
+		}
+		strncpy(prefix, PREFIX, MAXPATHLEN);
         joinpath(prefix, lib_python);
     }
     else
         reduce(prefix);
 
     if (!(efound = search_for_exec_prefix(argv0_path, home))) {
-        if (!Py_FrozenFlag)
+        if (!Py_FrozenFlag) {
             fprintf(stderr,
                 "Could not find platform dependent libraries <exec_prefix>\n");
-        strncpy(exec_prefix, EXEC_PREFIX, MAXPATHLEN);
+#ifdef ANDROID
+			__android_log_print(ANDROID_LOG_ERROR, "getpath.c", 
+				"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+				"Could not find platform dependent libraries <exec_prefix>");
+#endif
+        }
+		strncpy(exec_prefix, EXEC_PREFIX, MAXPATHLEN);
         joinpath(exec_prefix, "lib/lib-dynload");
     }
     /* If we found EXEC_PREFIX do *not* reduce it!  (Yet.) */
 
-    if ((!pfound || !efound) && !Py_FrozenFlag)
+    if ((!pfound || !efound) && !Py_FrozenFlag) {
         fprintf(stderr,
                 "Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]\n");
+#ifdef ANDROID
+			__android_log_print(ANDROID_LOG_ERROR, "getpath.c", 
+				"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, 
+				"Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]");
+#endif
+	}
 
     /* Calculate size of return buffer.
      */
