@@ -1,0 +1,67 @@
+	int sts;
+	PyCompilerFlags cf;
+
+	cf.cf_flags = 0;
+	
+	
+	
+
+		filename = argv[_PyOS_optind];
+		if (filename != NULL) {
+			if ((fp = fopen(filename, "r")) == NULL) {
+				fprintf(stderr, "%s: can't open file '%s'\n",
+					argv[0], filename);
+				exit(2);
+			}
+			else if (skipfirstline) {
+				int ch;
+				/* Push back first newline so line numbers
+				   remain the same */
+				while ((ch = getc(fp)) != EOF) {
+					if (ch == '\n') {
+						(void)ungetc(ch, fp);
+						break;
+					}
+				}
+			}
+			
+	Py_SetProgramName(argv[0]);
+	Py_Initialize();
+
+PySys_SetArgv(argc-_PyOS_optind, argv+_PyOS_optind);
+
+
+		if (filename == NULL && stdin_is_interactive) {
+			char *startup = Py_GETENV("PYTHONSTARTUP");
+			if (startup != NULL && startup[0] != '\0') {
+				FILE *fp = fopen(startup, "r");
+				if (fp != NULL) {
+					(void) PyRun_SimpleFile(fp, startup);
+					PyErr_Clear();
+					fclose(fp);
+				}
+			}
+		}
+		
+			
+			
+		sts = PyRun_AnyFileExFlags(
+			fp,
+			filename == NULL ? "<stdin>" : filename,
+			filename != NULL, &cf) != 0;
+
+	Py_Finalize();
+			
+#ifdef __INSURE__
+	/* Insure++ is a memory analysis tool that aids in discovering
+	 * memory leaks and other memory problems.  On Python exit, the
+	 * interned string dictionary is flagged as being in use at exit
+	 * (which it is).  Under normal circumstances, this is fine because
+	 * the memory will be automatically reclaimed by the system.  Under
+	 * memory debugging, it's a huge source of useless noise, so we
+	 * trade off slower shutdown for less distraction in the memory
+	 * reports.  -baw
+	 */
+	_Py_ReleaseInternedStrings();
+#endif /* __INSURE__ */
+

@@ -1,6 +1,12 @@
 #ifndef Py_CONFIG_H
 #define Py_CONFIG_H
 
+//vc6 memory leak detect
+#define USE_VC6_MEMORY_LEAK 0
+
+//for android assets path emulation
+#define PYTHON_MEMORY_FILE_PATH "../../assets"
+
 #define MS_NO_COREDLL
 
 /* pyconfig.h.  NOT Generated automatically by configure.

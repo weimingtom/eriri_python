@@ -35,6 +35,51 @@
 #define DL_EXPORT(RTYPE) RTYPE
 #endif
 
+#if defined(_MSC_VER) && defined(_DEBUG) && USE_VC6_MEMORY_LEAK
+
+/*
+see 
+http://www.nokuno.jp/secret/program2.html
+*/
+#include <crtdbg.h>
+#include <malloc.h>
+#include <stdlib.h>
+#define _CRTDBG_MAP_ALLOC
+/*
+#define new  ::new(_NORMAL_BLOCK, __file__, __line__)
+*/
+
+#ifdef malloc
+#undef malloc
+#endif
+#define malloc(s) (_malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__))
+
+#ifdef free
+#undef free
+#endif
+#define free(s) (_free_dbg(s, _NORMAL_BLOCK))
+
+#ifdef calloc
+#undef calloc
+#endif
+#define calloc(m, s) (_calloc_dbg(m, s, _NORMAL_BLOCK, __FILE__, __LINE__))
+
+#ifdef realloc
+#undef realloc
+#endif
+#define realloc(m, s) (_realloc_dbg(m, s, _NORMAL_BLOCK, __FILE__, __LINE__))
+
+#ifdef new
+#undef new
+#endif
+#define new DEBUG_NEW
+
+/*
+On Windows, when application start: 
+_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+*/
+#endif
+
 #if defined(__sgi) && defined(WITH_THREAD) && !defined(_SGI_MP_SOURCE)
 #define _SGI_MP_SOURCE
 #endif

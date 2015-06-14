@@ -63,6 +63,7 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
 # ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "Include" /I "." /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR /FD /GZ /c
@@ -494,9 +495,285 @@ SOURCE=.\Python\thread_pthread.h
 SOURCE=.\Python\traceback.c
 # End Source File
 # End Group
+# Begin Group "Include"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\Include\abstract.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\bitset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\bufferobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\cellobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\ceval.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\classobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\cobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\codecs.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\compile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\complexobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\cStringIO.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\descrobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\dictobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\errcode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\eval.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\fileobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\floatobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\frameobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\funcobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\graminit.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\grammar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\import.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\intobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\intrcheck.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\iterobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\listobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\longintrepr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\longobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\marshal.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\metagrammar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\methodobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\modsupport.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\moduleobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\node.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\object.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\objimpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\opcode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\osdefs.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\parsetok.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\patchlevel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pgenheaders.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\py_curses.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pydebug.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pyerrors.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pyfpe.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pygetopt.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pymactoolbox.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pymem.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pyport.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pystate.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\Python.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pythonrun.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\pythread.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\rangeobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\sliceobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\stringobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\structmember.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\structseq.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\symtable.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\sysmodule.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\token.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\traceback.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\tupleobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\ucnhash.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\unicodeobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Include\weakrefobject.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\pyconfig.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\pyconfig_android.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\pyconfig_vc6.h
 # End Source File
 # End Target
 # End Project
